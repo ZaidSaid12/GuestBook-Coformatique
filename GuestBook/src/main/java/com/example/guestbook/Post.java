@@ -3,14 +3,24 @@ package com.example.guestbook;
 import java.time.LocalDate;
 
 public class Post {
+    private int post_id;
     private String body;
     private LocalDate date;
     private int author_id;
 
-    public Post(String body, LocalDate date, int author_id) {
+    public Post(int id, String body, LocalDate date, int author_id) {
+        this.post_id = id;
         this.body = body;
         this.date = date;
         this.author_id = author_id;
+    }
+
+    public int getPost_id() {
+        return post_id;
+    }
+
+    public void setPost_id(int post_id) {
+        this.post_id = post_id;
     }
 
     public String getBody() {
@@ -40,7 +50,8 @@ public class Post {
     @Override
     public String toString() {
         return "Post{" +
-                "body='" + body + '\'' +
+                "post_id=" + post_id +
+                ", body='" + body + '\'' +
                 ", date=" + date +
                 ", author_id=" + author_id +
                 '}';

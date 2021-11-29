@@ -4,11 +4,15 @@ import com.jfoenix.controls.JFXButton;
 import com.mysql.cj.jdbc.JdbcPreparedStatement;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -28,7 +32,12 @@ public class PostsController implements Initializable {
     @FXML
     private TextArea message_text_area;
 
+    @FXML
+    private JFXButton showMessages_button;
+
     private static JdbcPreparedStatement preparedStatement;
+
+    private  Stage selfStage ;
 
     public PostsController() {
     }
@@ -38,9 +47,25 @@ public class PostsController implements Initializable {
     }
 
 
+    private void hideself(){
+        selfStage = (Stage) writeMessage_Button.getScene().getWindow();
+        selfStage.hide();
+    }
 
-
-
+    private void showPostsAndRepliesScreen() throws IOException {
+        Stage messagesStage =new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("PostsAndReplies.fxml"));
+        Scene scene = new Scene(loader.load(), 600, 400);
+        messagesStage.setTitle("Messages Screen");
+        messagesStage.setScene(scene);
+        messagesStage.show();
+    }
+    @FXML
+    void showMessages(ActionEvent event) throws IOException {
+        hideself();
+        PostsAndRepliesController messagesController = new PostsAndRepliesController(author);
+        showPostsAndRepliesScreen();
+    }
 
     @FXML
     void writeMessage(ActionEvent event) throws SQLException {
