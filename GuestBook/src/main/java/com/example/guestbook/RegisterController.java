@@ -23,6 +23,12 @@ public class RegisterController {
     @FXML
     void Create_Account(ActionEvent event) {
 
+        // Get User's info
+
+
+
+
+
     }
 
 }

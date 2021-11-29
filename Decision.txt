@@ -1,0 +1,2 @@
+1- i decided to use SQL database instead of No-SQL as i am more comfortable with SQL and wanted to finish the assessment ASAP
+2- Use Mysql Database {Mysql Workbench}

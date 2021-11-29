@@ -3,6 +3,7 @@ module com.example.guestbook {
     requires javafx.fxml;
     requires javafx.graphics;
     requires com.jfoenix;
+    requires java.sql;
 
 
     opens com.example.guestbook to javafx.fxml;
