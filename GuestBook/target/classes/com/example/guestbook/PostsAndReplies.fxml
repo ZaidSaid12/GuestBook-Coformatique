@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #303f9f;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.guestbook.PostsAndRepliesController">
+<AnchorPane prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #303f9f;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.guestbook.PostsAndRepliesController">
    <children>
-      <Label layoutX="247.0" layoutY="35.0" text="Messages" textFill="WHITE">
+      <Label layoutX="302.0" layoutY="34.0" text="Messages" textFill="WHITE">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
       </Label>
+      <ScrollPane hbarPolicy="ALWAYS" layoutX="14.0" layoutY="70.0" prefHeight="425.0" prefWidth="682.0" style="-fx-background-color: #303f9f;" vbarPolicy="ALWAYS">
+         <content>
+            <VBox fx:id="messages_vbox" prefHeight="410.0" prefWidth="666.0" style="-fx-background-color: #303f9f;" />
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

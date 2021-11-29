@@ -55,7 +55,7 @@ public class PostsController implements Initializable {
     private void showPostsAndRepliesScreen() throws IOException {
         Stage messagesStage =new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("PostsAndReplies.fxml"));
-        Scene scene = new Scene(loader.load(), 600, 400);
+        Scene scene = new Scene(loader.load(), 700, 500);
         messagesStage.setTitle("Messages Screen");
         messagesStage.setScene(scene);
         messagesStage.show();
