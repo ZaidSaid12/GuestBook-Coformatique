@@ -31,12 +31,12 @@
          </font>
       </Label>
       <TextField fx:id="registerUsername_text" layoutX="235.0" layoutY="104.0" prefHeight="26.0" prefWidth="179.0" promptText="Please Enter Your Username" />
+      <PasswordField fx:id="registerPassword_text" layoutX="235.0" layoutY="164.0" prefHeight="26.0" prefWidth="179.0" promptText="Please Enter Your Password" />
       <TextField fx:id="registerEmail_text" layoutX="235.0" layoutY="228.0" prefHeight="26.0" prefWidth="179.0" promptText="Please Enter Your Email Address" />
       <JFXButton fx:id="registerAccount_button" buttonType="RAISED" layoutX="242.0" layoutY="302.0" onAction="#Create_Account" style="-fx-background-color: #140078;" text="Create Account" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </JFXButton>
-      <PasswordField fx:id="registerPassword_text" layoutX="235.0" layoutY="164.0" prefHeight="26.0" prefWidth="179.0" promptText="Please Enter Your Password" />
    </children>
 </AnchorPane>
