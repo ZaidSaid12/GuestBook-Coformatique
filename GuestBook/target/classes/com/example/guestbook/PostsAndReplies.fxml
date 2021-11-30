@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -8,6 +9,11 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #303f9f;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.guestbook.PostsAndRepliesController">
    <children>
+      <JFXButton fx:id="backButton" alignment="CENTER" buttonType="RAISED" layoutX="25.0" layoutY="39.0" onAction="#goBack" prefHeight="30.0" prefWidth="63.0" style="-fx-background-color: #001970;" text="Back" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
       <Label layoutX="302.0" layoutY="34.0" text="Messages" textFill="WHITE">
          <font>
             <Font name="System Bold Italic" size="24.0" />

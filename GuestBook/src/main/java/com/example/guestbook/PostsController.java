@@ -64,6 +64,7 @@ public class PostsController implements Initializable {
     void showMessages(ActionEvent event) throws IOException {
         hideself();
         PostsAndRepliesController messagesController = new PostsAndRepliesController(author);
+        messagesController.setSenderStage((Stage) writeMessage_Button.getScene().getWindow());
         showPostsAndRepliesScreen();
     }
 

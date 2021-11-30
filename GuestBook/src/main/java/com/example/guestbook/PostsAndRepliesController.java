@@ -13,6 +13,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.Date;
@@ -28,10 +29,16 @@ import static com.example.guestbook.main.connection;
 public class PostsAndRepliesController implements Initializable {
     private static Author author;
     private static JdbcPreparedStatement preparedStatement;
+    private static Stage selfStage ;
+    private static Stage senderStage;
+
     private ArrayList<Post> postList = new ArrayList<Post>();
 
     @FXML
     private VBox messages_vbox;
+
+    @FXML
+    private JFXButton backButton;
 
     public PostsAndRepliesController() {
     }
@@ -39,6 +46,22 @@ public class PostsAndRepliesController implements Initializable {
     public PostsAndRepliesController(Author author) {
         this.author = author;
     }
+
+    @FXML
+    void goBack(ActionEvent event) {
+        hideself();
+        senderStage.show();
+    }
+
+    private void hideself(){
+        selfStage = (Stage) messages_vbox.getScene().getWindow();
+        selfStage.hide();
+    }
+
+    public static void setSenderStage(Stage stage){
+        senderStage = stage;
+    }
+
 
     public void deletePost(int post_id) throws SQLException {
         System.out.println("deleted");
@@ -72,6 +95,15 @@ public class PostsAndRepliesController implements Initializable {
         preparedStatement.executeUpdate();
     }
 
+    private void editDatabase(int post_id, String editedText) throws SQLException {
+        String updateQuery = "update posts set body = ? where post_id = ?";
+        preparedStatement = (JdbcPreparedStatement) connection.prepareStatement(updateQuery);
+        preparedStatement.setString(1, editedText);
+        preparedStatement.setInt(2, post_id);
+        preparedStatement.executeUpdate();
+
+    }
+
     public void readFromDB() throws SQLException {
         ScrollPane sp = new ScrollPane();
         String queryStatement = "SELECT * FROM posts";
@@ -100,13 +132,28 @@ public class PostsAndRepliesController implements Initializable {
             replies_vbox.setMaxWidth(Double.MAX_VALUE);
             replies_vbox.setPadding(new Insets(0, 40.0f, 0, 0));
 
+
+
             //Label post_data = new Label(p.getBody());
             TextField post_data = new TextField(p.getBody());
             post_data.setStyle("-fx-background-color: #303f9f;"+ "-fx-text-fill: #ffffff;" + "-fx-border-color: #ffffff;");
             post_data.setEditable(false);
+            // Create an ok button for Editing messages
+
+            JFXButton okButton = new JFXButton("Ok");
+            okButton.getStyleClass().add("button-raised");
+            okButton.setStyle("-fx-background-color: #001970");
+            okButton.setTextFill(Color.WHITE);
+            okButton.setVisible(false);  // By default it's hidden
+
+            // Create a HBox to carry the post and the button
+            HBox editHbox = new HBox();
+            editHbox.getChildren().add(post_data);
+            editHbox.getChildren().add(okButton);
+
 
             post_vbox.getChildren().add(author_info);
-            post_vbox.getChildren().add(post_data);
+            post_vbox.getChildren().add(editHbox);
             // Add reply text field
 
             TextField newReply = new TextField();
@@ -126,6 +173,23 @@ public class PostsAndRepliesController implements Initializable {
                     System.out.println(p.toString());
                     post_data.setEditable(true);
                     post_data.setStyle("-fx-background-color: #ffffff;"+ "-fx-text-fill: #000000;");
+
+                    okButton.setVisible(true);
+                    okButton.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent actionEvent) {
+                            String editedText = post_data.getText();
+                            try {
+                                editDatabase(p.getPost_id(), editedText);
+                                post_data.setStyle("-fx-background-color: #303f9f;"+ "-fx-text-fill: #ffffff;" + "-fx-border-color: #ffffff;");
+                                post_data.setEditable(false);
+                                okButton.setVisible(false);
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
                 }
             });
 
